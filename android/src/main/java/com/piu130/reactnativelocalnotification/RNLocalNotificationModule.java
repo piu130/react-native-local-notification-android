@@ -42,12 +42,12 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
-                data.getInt("id", new Random().nextInt()),
+                data.containsKey("id") ? (int) data.getDouble("id") : new Random().nextInt(),
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, data.getLong("fireDate"), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, (long) data.getDouble("fireDate"), pendingIntent);
     }
 
     @ReactMethod
@@ -55,7 +55,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
 
         Bundle data = Arguments.toBundle(details);
-        NotificationChannel channel = new NotificationChannel(data.getString("id"), data.getCharSequence("name"), data.getInt("importance"));
+        NotificationChannel channel = new NotificationChannel(data.getString("id"), data.getCharSequence("name"), (int) data.getDouble("importance"));
         if (data.containsKey("description")) channel.setDescription(data.getString("description"));
         NotificationManager manager = (NotificationManager) getReactApplicationContext().getSystemService(NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
