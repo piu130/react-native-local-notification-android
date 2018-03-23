@@ -19,7 +19,7 @@ public class NotificationBuilder {
         if (data.containsKey("alertBody")) builder.setContentText(data.getString("alertBody"));
         if (data.containsKey("alertTitle")) builder.setContentTitle(data.getString("alertTitle"));
         if (data.containsKey("autoCancel")) builder.setAutoCancel(data.getBoolean("autoCancel"));
-        if (data.containsKey("badgeIconType")) builder.setBadgeIconType(data.getInt("badgeIconType"));
+        if (data.containsKey("badgeIconType")) builder.setBadgeIconType((int) data.getDouble("badgeIconType"));
         if (data.containsKey("category")) builder.setCategory(data.getString("category"));
         if (data.containsKey("color")) builder.setColor(Color.parseColor(data.getString("color")));
         if (data.containsKey("colorized")) builder.setColorized(data.getBoolean("colorized"));
@@ -27,13 +27,13 @@ public class NotificationBuilder {
         if (data.containsKey("group")) builder.setGroup(data.getString("group"));
         if (data.containsKey("largeIcon")) builder.setLargeIcon(getLargeIcon(context, data));
         if (data.containsKey("localOnly")) builder.setLocalOnly(data.getBoolean("localOnly"));
-        if (data.containsKey("number")) builder.setNumber(data.getInt("number"));
-        if (data.containsKey("priority")) builder.setPriority(data.getInt("priority"));
+        if (data.containsKey("number")) builder.setNumber((int) data.getDouble("number"));
+        if (data.containsKey("priority")) builder.setPriority((int) data.getDouble("priority"));
         if (data.containsKey("sortKey")) builder.setSortKey(data.getString("sortKey"));
         if (data.containsKey("subText")) builder.setSubText(data.getString("subText"));
         if (data.containsKey("ticker")) builder.setTicker(data.getString("ticker"));
-        if (data.containsKey("timeoutAfter")) builder.setTimeoutAfter(data.getInt("timeoutAfter"));
-        if (data.containsKey("visibility")) builder.setVisibility(data.getInt("visibility"));
+        if (data.containsKey("timeoutAfter")) builder.setTimeoutAfter((int) data.getDouble("timeoutAfter"));
+        if (data.containsKey("visibility")) builder.setVisibility((int) data.getDouble("visibility"));
 
         builder
                 .setSmallIcon(getSmallIconId(context, data));
