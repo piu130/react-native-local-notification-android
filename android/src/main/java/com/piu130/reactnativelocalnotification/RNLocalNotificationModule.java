@@ -56,7 +56,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         Bundle data = Arguments.toBundle(details);
         NotificationChannel channel = new NotificationChannel(data.getString("id"), data.getCharSequence("name"), data.getInt("importance"));
         if (data.containsKey("description")) channel.setDescription(data.getString("description"));
-        NotificationManagerCompat manager = NotificationManagerCompat.from(getReactApplicationContext());
+        NotificationManager manager = (NotificationManager) getReactApplicationContext().getSystemService(NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
     }
 }
