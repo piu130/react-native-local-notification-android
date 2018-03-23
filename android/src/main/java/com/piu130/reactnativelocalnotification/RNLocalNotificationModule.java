@@ -7,9 +7,11 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import java.util.Random;
@@ -44,5 +46,16 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         );
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, data.getLong("fireDate"), pendingIntent);
+    }
+
+    @ReactMethod
+    public void createNotificationChannel(ReadableMap details) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+
+        Bundle data = Arguments.toBundle(details);
+        NotificationChannel channel = new NotificationChannel(data.getString("id"), data.getCharSequence("name"), data.getInt("importance"));
+        if (data.containsKey("description")) channel.setDescription(data.getString("description"));
+        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
+        manager.createNotificationChannel(channel);
     }
 }
