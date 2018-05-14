@@ -54,6 +54,24 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void cancelLocalNotifications(ReadableMap details) {
+        Bundle data = Arguments.toBundle(details);
+        Context context = getReactApplicationContext();
+
+        Intent intent = new Intent(context, NotificationPublisher.class);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                (int) data.getDouble("id"),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        alarmManager.cancel(pendingIntent);
+    }
+
+    @ReactMethod
     public void createNotificationChannel(ReadableMap details) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
 
