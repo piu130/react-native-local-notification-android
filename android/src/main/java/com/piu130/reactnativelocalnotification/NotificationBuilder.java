@@ -52,13 +52,11 @@ public class NotificationBuilder {
     }
 
     private static Bitmap getLargeIcon(Context context, Bundle data) {
-        int id = getIconId(context, data.getString("largeIcon"));
+        int id = getIconId(context, data.getString("largeIcon", "ic_launcher"));
 
         return BitmapFactory.decodeResource(
                 context.getResources(),
-                id == 0
-                        ? getIconId(context, "ic_launcher")
-                        : id
+                id
         );
     }
 
