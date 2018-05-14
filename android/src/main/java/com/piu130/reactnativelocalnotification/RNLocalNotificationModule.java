@@ -1,7 +1,9 @@
 package com.piu130.reactnativelocalnotification;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
@@ -14,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationManagerCompat;
 
 import java.util.Random;
 
@@ -59,5 +62,12 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         if (data.containsKey("description")) channel.setDescription(data.getString("description"));
         NotificationManager manager = (NotificationManager) getReactApplicationContext().getSystemService(NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
+    }
+
+    @ReactMethod
+    public void checkPermissions(Promise promise) {
+        ReactContext reactContext = getReactApplicationContext();
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(reactContext);
+        promise.resolve(managerCompat.areNotificationsEnabled());
     }
 }
