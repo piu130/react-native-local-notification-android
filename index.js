@@ -43,6 +43,7 @@ LocalNotification.createNotificationChannel = details => RNLocalNotification.cre
  * @param {string} details.largeIcon - Notification large icon.
  * @param {number} details.number - Notification number.
  * @param {number} details.priority - Notification priority.
+ * @param {string} details.smallIcon - Notification small icon.
  * @param {string} details.sortKey - Notification sort key.
  * @param {string} details.subText - Notification sub text.
  * @param {string} details.ticker - Notification ticker.
