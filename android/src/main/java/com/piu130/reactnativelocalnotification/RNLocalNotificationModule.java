@@ -37,6 +37,9 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void scheduleLocalNotification(ReadableMap details) {
         Bundle data = Arguments.toBundle(details);
+
+        if (data.getDouble("id") == 0) data.putDouble("id", new Random().nextInt())
+
         Context context = getReactApplicationContext();
 
         Intent intent = new Intent(context, NotificationPublisher.class);
@@ -45,7 +48,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
-                data.containsKey("id") ? (int) data.getDouble("id") : new Random().nextInt(),
+                data.getDouble("id"),
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
