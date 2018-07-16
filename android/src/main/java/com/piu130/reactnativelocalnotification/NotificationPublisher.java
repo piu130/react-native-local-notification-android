@@ -16,6 +16,6 @@ public class NotificationPublisher extends BroadcastReceiver {
         Notification notification = NotificationBuilder.fromBundle(context, data);
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
-        manager.notify(5, notification);
+        manager.notify((int) data.getDouble("id"), notification);
     }
 }
