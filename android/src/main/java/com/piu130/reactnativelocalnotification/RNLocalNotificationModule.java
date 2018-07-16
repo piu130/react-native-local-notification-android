@@ -68,7 +68,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
                 context,
                 (int) data.getDouble("id"),
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_CANCEL_CURRENT
         );
 
         alarmManager.cancel(pendingIntent);
