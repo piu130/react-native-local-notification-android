@@ -38,7 +38,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
     public void scheduleLocalNotification(ReadableMap details) {
         Bundle data = Arguments.toBundle(details);
 
-        if (data.getDouble("id") == 0) data.putDouble("id", new Random().nextInt())
+        if (data.getDouble("id") == 0) data.putDouble("id", new Random().nextInt());
 
         Context context = getReactApplicationContext();
 
