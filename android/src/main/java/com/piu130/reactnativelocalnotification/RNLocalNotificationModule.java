@@ -48,7 +48,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
-                data.getDouble("id"),
+                (int) data.getDouble("id"),
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
