@@ -78,4 +78,10 @@ public class NotificationHelper {
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
         promise.resolve(managerCompat.areNotificationsEnabled());
     }
+
+    protected void rescheduleAll() {
+        for(Map.Entry<Integer,Bundle> entry : notificationStorage.getAll().entrySet()) {
+            scheduleLocalNotification(entry.getValue());
+        }
+    }
 }
