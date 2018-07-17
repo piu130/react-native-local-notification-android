@@ -85,7 +85,7 @@ checkPermissions()
 Param | Type | Description
 --- | --- | ---
 id | number | Notification id.
-fireDate | number | Fire date in millis (eg. date.getTime()).
+fireDate | number | Fire date in millis (eg. `date.getTime()`).
 channelId | string | The id of the created channel.
 alertBody | string | Notification content.
 alertTitle | string | Notification title.
