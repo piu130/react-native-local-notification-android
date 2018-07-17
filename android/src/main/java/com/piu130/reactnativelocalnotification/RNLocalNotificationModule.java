@@ -25,8 +25,11 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
 
+    private final NotificationStorage notificationStorage;
+
     public RNLocalNotificationModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        notificationStorage = NotificationStorage.fromContext(reactContext);
     }
 
     @Override
@@ -39,6 +42,7 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         Bundle data = Arguments.toBundle(details);
 
         if (data.getDouble("id") == 0) data.putDouble("id", new Random().nextInt());
+        int id = (int) data.getDouble("id");
 
         Context context = getReactApplicationContext();
 
@@ -48,17 +52,20 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
-                (int) data.getDouble("id"),
+                id,
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, (long) data.getDouble("fireDate"), pendingIntent);
+
+        notificationStorage.store(id, data);
     }
 
     @ReactMethod
     public void cancelLocalNotifications(ReadableMap details) {
         Bundle data = Arguments.toBundle(details);
+        int id = (int) data.getDouble("id");
         Context context = getReactApplicationContext();
 
         Intent intent = new Intent(context, NotificationPublisher.class);
@@ -66,12 +73,14 @@ public class RNLocalNotificationModule extends ReactContextBaseJavaModule {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,
-                (int) data.getDouble("id"),
+                id,
                 intent,
                 PendingIntent.FLAG_CANCEL_CURRENT
         );
 
         alarmManager.cancel(pendingIntent);
+
+        notificationStorage.remove(id);
     }
 
     @ReactMethod
