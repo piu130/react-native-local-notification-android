@@ -12,10 +12,13 @@ public class NotificationPublisher extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle data = intent.getBundleExtra("data");
+        int id = (int) data.getDouble("id");
 
         Notification notification = NotificationBuilder.fromBundle(context, data);
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
-        manager.notify((int) data.getDouble("id"), notification);
+        manager.notify(id, notification);
+
+        NotificationStorage.fromContext(context).remove(id);
     }
 }
