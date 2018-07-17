@@ -43,7 +43,7 @@ public class NotificationHelper {
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, (long) data.getDouble("fireDate"), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, (long) data.getDouble("fireDate", (double) System.currentTimeMillis()), pendingIntent);
 
         notificationStorage.store(id, data);
     }
