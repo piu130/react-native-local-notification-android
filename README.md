@@ -82,26 +82,26 @@ checkPermissions()
 
 ## Notification
 
-Param | Type
----|---
-id | number
-fireDate | number
-channelId | string
-alertBody | string
-alertTitle | string
-autoCancel | boolean
-badgeIconType | number
-category | string
-color | string
-colorized | boolean
-contentInfo | string
-group | string
-largeIcon | string
-number | number
-priority | number
-smallIcon | string
-sortKey | string
-subText | string
-ticker | string
-timeoutAfter | number
-visibility | number
+Param | Type | Description
+--- | --- | ---
+id | number | Notification id.
+fireDate | number | Fire date in millis (eg. date.getTime()).
+channelId | string | The id of the created channel.
+alertBody | string | Notification content.
+alertTitle | string | Notification title.
+autoCancel | boolean | Auto cancel on notification click.
+badgeIconType | number | The type of the badge icon (if supported by launcher).
+category | string | Notification category.
+color | string | Notification color (`colorized` must be true).
+colorized | boolean | Should the notification be colored with `color`.
+contentInfo | string | Large text at the right-hand side of the notification.
+group | string | Notification group.
+largeIcon | string | Notifications large icon.
+number | number | Large number at the right-hand side of the notification.
+priority | number | Notification priority.
+smallIcon | string | Notification small icon.
+sortKey | string | Sort key to sort the notifications order.
+subText | string | Third line of notification.
+ticker | string | Ticker text is sent to accessibility services.
+timeoutAfter | number | Set the cancel timeout.
+visibility | number | The visibility (public, private or secret).
