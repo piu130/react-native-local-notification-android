@@ -5,6 +5,7 @@ const LocalNotification = {}
 
 /**
  * Cancels a local notification.
+ * @param {object} details - Cancel details.
  * @param {number} details.id - Notification id.
  */
 LocalNotification.cancelLocalNotifications = details => RNLocalNotification.cancelLocalNotifications(details)
