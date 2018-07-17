@@ -79,3 +79,29 @@ checkPermissions()
         enabled ? 'You have the permission' : 'You don\'t have the permission'
     ))
 ```
+
+## Notification
+
+Param | Type
+---|---
+id | number
+fireDate | number
+channelId | string
+alertBody | string
+alertTitle | string
+autoCancel | boolean
+badgeIconType | number
+category | string
+color | string
+colorized | boolean
+contentInfo | string
+group | string
+largeIcon | string
+number | number
+priority | number
+smallIcon | string
+sortKey | string
+subText | string
+ticker | string
+timeoutAfter | number
+visibility | number
